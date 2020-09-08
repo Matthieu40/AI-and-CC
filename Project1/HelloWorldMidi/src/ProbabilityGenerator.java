@@ -34,14 +34,32 @@ public class ProbabilityGenerator<T> {
 	T generate() {
 		T newToken = null;
 		//do something here (generate 1 token)
-		float rIndex = (float) Math.random();
+		float rIndex = (float) (Math.random() * (1-0 + 1)+ 0);
+		 ArrayList<Integer> probs = new ArrayList<>();
+		 int sum = 0;
+		
+		for(int i = 0; i < alphabet_counts.size();i++) {
+			sum += alphabet_counts.get(i);
+			probs.add(sum/4);
+			
+		}
+		
 		
 		for(int i=0; i< alphabet.size(); i++) {
-			
+			if(rIndex < probs.get(0)) {
+				newToken = alphabet.get(0);
+			}else if(rIndex < probs.get(1)) {
+				newToken = alphabet.get(1);
+			}else if(rIndex < probs.get(2)) {
+				newToken = alphabet.get(2);
+			}else if(rIndex < probs.get(3)){
+				newToken = alphabet.get(3);
+			}
 		}
 		
 		return newToken;
 	}
+	
 	
 	ArrayList<T> generate(int length)
 	{
