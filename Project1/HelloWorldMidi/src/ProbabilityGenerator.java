@@ -12,7 +12,7 @@ public class ProbabilityGenerator<T> {
 	
 	void train(ArrayList<T> newTokens) {
 		//code training
-		for(int i = 0; i < newTokens.size() -1; i++){
+		for(int i = 0; i < newTokens.size(); i++){
 			
 
 			T index = alphabet.get(i);
