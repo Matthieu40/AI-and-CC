@@ -41,13 +41,17 @@ public class ProbabilityGenerator<T> {
 		}
 	}
 	
-	void printProbabilityDistribution()//should this accept parameters??
+	void printProbabilityDistribution(ArrayList<T> newTokens)//should this accept parameters??
 	{
 		//normalize the array and print
-		for(int i = 0; i</*Which array should I put in here?*/;i ++){
+		for(int i = 0; i<newTokens.size();i ++){
 			
+			float rIndex = (float) (Math.random() * (1-0 + 1)+ 0);//placeholder for probability (not sure how to calculate)
+		System.out.println("Token: " + newTokens.get(i) + " | " + "Probability: " +  rIndex); 
+	} 
+		
 	}
-	}
+	
 	
 	T generate() {
 		T newToken = null;

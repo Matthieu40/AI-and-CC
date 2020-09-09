@@ -107,12 +107,16 @@ public class HelloWorldMidiMain extends PApplet {
 
 	//this starts & restarts the melody.
 	public void keyPressed() {
+		
 		MidiFileToNotes midiNotesMary; //Read a midi file
 		String filePath = getPath("mid/MaryHadALittleLamb.mid");
-		
 		midiNotesMary = new MidiFileToNotes(filePath); 
-		
 		midiNotesMary.setWhichLine(0);
+		
+		ProbabilityGenerator<Integer> pitchGenerator= new ProbabilityGenerator<Integer>();
+		ProbabilityGenerator<Double> rhythmGenerator= new ProbabilityGenerator<Double>();
+		pitchGenerator.train(midiNotesMary.getPitchArray());
+		rhythmGenerator.train(midiNotesMary.getRhythmArray());
 		
 		
 		if (key == ' ') {
@@ -123,8 +127,11 @@ public class HelloWorldMidiMain extends PApplet {
 		else if (key == '1'){
 			//run unit 1
 			
-			System.out.println(midiNotesMary.getPitchArray());
-			System.out.println(midiNotesMary.getRhythmArray());
+			pitchGenerator.printProbabilityDistribution(midiNotesMary.getPitchArray());
+			rhythmGenerator.train(midiNotesMary.getRhythmArray());
+			
+			//System.out.println(midiNotesMary.getPitchArray());
+			//System.out.println(midiNotesMary.getRhythmArray());
 		}
 	}
 }
