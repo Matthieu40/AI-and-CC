@@ -1,6 +1,6 @@
 /*
- * c2017 Courtney Brown 
- * 
+ * c2020-2021 Matthieu Legagneur 
+ * 9/8/20
  * Class: MelodyPlayer
  * Description: Sends a melody of midi notes to an external player/midi channel
  * 

@@ -1,7 +1,7 @@
 
 /*
- * c2017 Courtney Brown 
- * 
+ *  c2020-2021 Matthieu Legagneur 
+ * 9/8/20
  * Class: MidiFileToNotes
  * Description: Uses JMusic to get notes & info from a midi file
  * 

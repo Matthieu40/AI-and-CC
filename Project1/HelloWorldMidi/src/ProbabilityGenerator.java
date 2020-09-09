@@ -1,3 +1,13 @@
+/*
+ * c2020-2021 Matthieu Legagneur
+ * 
+ * Class: H
+ * Description: Demonstration of MIDI file manipulations, etc. & 'MelodyPlayer' sequencer
+ * 
+ * 9/8/20
+ * 
+ */
+
 import java.util.*;
 public class ProbabilityGenerator<T> {
 
@@ -14,22 +24,30 @@ public class ProbabilityGenerator<T> {
 		//code training
 		for(int i = 0; i < newTokens.size(); i++){
 			
-
-			T index = alphabet.get(i);
 			
-			if(index == null) {
+			int index = alphabet.indexOf(newTokens.get(i));
+			
+			if(index == -1) {
 				
 				T w = newTokens.get(i);
 				alphabet.add(w);
 				
 				alphabet_counts.add(0);
+				index = alphabet.size()-1;
 			}
 			
-			alphabet_counts.get((int) index);
+			alphabet_counts.set(index, alphabet_counts.get(index)+ 1);
 			
 		}
 	}
 	
+	void printProbabilityDistribution()//should this accept parameters??
+	{
+		//normalize the array and print
+		for(int i = 0; i</*Which array should I put in here?*/;i ++){
+			
+	}
+	}
 	
 	T generate() {
 		T newToken = null;

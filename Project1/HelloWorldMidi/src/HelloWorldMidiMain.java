@@ -1,9 +1,11 @@
 
 /*
- * c2017-2019 Courtney Brown 
+ * c2020-2021 Matthieu Legagneur
  * 
  * Class: H
  * Description: Demonstration of MIDI file manipulations, etc. & 'MelodyPlayer' sequencer
+ * 
+ * 9/8/20
  * 
  */
 
@@ -73,8 +75,11 @@ public class HelloWorldMidiMain extends PApplet {
 	}
 
 	public void draw() {
-		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
-
+	//***	player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+		
+		textSize(12);
+		fill(0, 102, 153);
+		text("Press 1 to start the unit test!", width/10, height/2);
 	}
 
 	//this finds the absolute path of a file
@@ -102,9 +107,24 @@ public class HelloWorldMidiMain extends PApplet {
 
 	//this starts & restarts the melody.
 	public void keyPressed() {
+		MidiFileToNotes midiNotesMary; //Read a midi file
+		String filePath = getPath("mid/MaryHadALittleLamb.mid");
+		
+		midiNotesMary = new MidiFileToNotes(filePath); 
+		
+		midiNotesMary.setWhichLine(0);
+		
+		
 		if (key == ' ') {
 			player.reset();
 			println("Melody started!");
+			
+		}
+		else if (key == '1'){
+			//run unit 1
+			
+			System.out.println(midiNotesMary.getPitchArray());
+			System.out.println(midiNotesMary.getRhythmArray());
 		}
 	}
 }
