@@ -46,7 +46,7 @@ public class ProbabilityGenerator<T> {
 		//normalize the array and print
 		for(int i = 0; i<newTokens.size();i ++){
 			
-			float rIndex = (float) (Math.random() * (1-0 + 1)+ 0);//placeholder for probability (not sure how to calculate)
+			float rIndex = (float) Math.random();//placeholder for probability (not sure how to calculate)
 		System.out.println("Token: " + newTokens.get(i) + " | " + "Probability: " +  rIndex); 
 	} 
 		
@@ -56,7 +56,7 @@ public class ProbabilityGenerator<T> {
 	T generate() {
 		T newToken = null;
 		//do something here (generate 1 token)
-		float rIndex = (float) (Math.random() * (1-0 + 1)+ 0);
+		float rIndex = (float) Math.random();
 		 ArrayList<Integer> probs = new ArrayList<>();
 		 int sum = 0;
 		

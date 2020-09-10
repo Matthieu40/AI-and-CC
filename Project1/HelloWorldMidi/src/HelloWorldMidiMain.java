@@ -128,7 +128,8 @@ public class HelloWorldMidiMain extends PApplet {
 			//run unit 1
 			
 			pitchGenerator.printProbabilityDistribution(midiNotesMary.getPitchArray());
-			rhythmGenerator.train(midiNotesMary.getRhythmArray());
+			
+			rhythmGenerator.printProbabilityDistribution(midiNotesMary.getRhythmArray());
 			
 			//System.out.println(midiNotesMary.getPitchArray());
 			//System.out.println(midiNotesMary.getRhythmArray());
