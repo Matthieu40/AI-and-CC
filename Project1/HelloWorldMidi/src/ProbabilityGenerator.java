@@ -13,11 +13,14 @@ public class ProbabilityGenerator<T> {
 
 	ArrayList<T> alphabet;	
 	ArrayList<Integer> alphabet_counts;
+	// add probability array and update it in train
+	ArrayList<Float> probs = new ArrayList<>();
 	
 	ProbabilityGenerator(){
 		
 		alphabet = new ArrayList<T>();
 		alphabet_counts = new ArrayList<Integer>();
+		
 	}
 	
 	void train(ArrayList<T> newTokens) {
@@ -38,22 +41,33 @@ public class ProbabilityGenerator<T> {
 			
 			alphabet_counts.set(index, alphabet_counts.get(index)+ 1);
 			
+			
 		}
+		
+		//find total and calculate new probability array from the alphabet count array0
+		float total = 0;
+		total += newTokens.size();
+		
+		for(int i = 0;i < alphabet_counts.size();i++) {
+			float prob = alphabet_counts.get(i) / total;
+			probs.add (prob);
+		}
+		
 	}
 	
 	void printProbabilityDistribution(ArrayList<T> newTokens)//should this accept parameters??
 	{
 		//normalize the array and print
-		for(int i = 0; i<newTokens.size();i ++){
+		for(int i = 0; i<alphabet.size();i ++){
 			
-			float rIndex = (float) Math.random();//placeholder for probability (not sure how to calculate)
-		System.out.println("Token: " + newTokens.get(i) + " | " + "Probability: " +  rIndex); 
+		System.out.println("Token: " + alphabet.get(i) + " | " + "Probability: " +  probs.get(i)); //change to probability.get i); 
+		
 	} 
 		
 	}
 	
 	
-	T generate() {
+	T generate() {// switch to how it was done in the lecture
 		T newToken = null;
 		//do something here (generate 1 token)
 		float rIndex = (float) Math.random();
