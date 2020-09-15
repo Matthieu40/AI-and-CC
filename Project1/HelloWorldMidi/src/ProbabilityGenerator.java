@@ -69,7 +69,7 @@ public class ProbabilityGenerator<T> {
 	
 	
 	T generate() {// switch to how it was done in the lecture
-		T newToken = null;
+		//T newToken = null;
 		//do something here (generate 1 token)
 		
 		
@@ -79,14 +79,20 @@ public class ProbabilityGenerator<T> {
 			sumProbs.add(index);
 		}
 		
-		for(int i =0; i < sumProbs.size(); i++) {
-			float rIndex = (float) Math.random();
-			//float index = ;//this is where the confusion starts. How do I calculate this index?
+		boolean found = false;
+		int i = 0;
+		float rIndex = (float) Math.random();
+		while(found = false && i < sumProbs.size()) {
+			found = rIndex < sumProbs.get(i);
+			i++;
 		}
 		
+		//System.out.println(sumProbs);
+		return alphabet.get(i - 1);
 		
 		
-		return newToken;
+		
+		//return newToken;
 	}
 	
 	
