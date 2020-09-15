@@ -72,12 +72,12 @@ public class ProbabilityGenerator<T> {
 		//T newToken = null;
 		//do something here (generate 1 token)
 		
+		sumProbs.add(probs.get(0));
 		
-		for(int i=0; i< alphabet.size(); i++) {
-			float rIndex = (float) Math.random();
-			float index = alphabet.size() * rIndex;
-			sumProbs.add(index);
+		for(int i=1; i< probs.size()-2; i++) {
+			sumProbs.add(probs.get(i) + sumProbs.get(i-1));
 		}
+		sumProbs.add((float) 1);
 		
 		boolean found = false;
 		int i = 0;
@@ -87,7 +87,7 @@ public class ProbabilityGenerator<T> {
 			i++;
 		}
 		
-		//System.out.println(sumProbs);
+		System.out.println(sumProbs);
 		return alphabet.get(i - 1);
 		
 		
