@@ -133,6 +133,23 @@ public class HelloWorldMidiMain extends PApplet {
 			
 			//System.out.println(midiNotesMary.getPitchArray());
 			//System.out.println(midiNotesMary.getRhythmArray());
+		}else if(key == '2') {
+			
+			System.out.println("pitches:");
+				pitchGenerator.generate(20);
+			
+			
+			System.out.println("rhythm:");
+				rhythmGenerator.generate(20);
+			
+			
+			
+		}else if (key == '3') {
+			
+			
+			
 		}
+		
+		
 	}
 }

@@ -15,6 +15,7 @@ public class ProbabilityGenerator<T> {
 	ArrayList<Integer> alphabet_counts;
 	// add probability array and update it in train
 	ArrayList<Float> probs = new ArrayList<>();
+	ArrayList<Float> sumProbs = new ArrayList<>();
 	
 	ProbabilityGenerator(){
 		
@@ -70,28 +71,20 @@ public class ProbabilityGenerator<T> {
 	T generate() {// switch to how it was done in the lecture
 		T newToken = null;
 		//do something here (generate 1 token)
-		float rIndex = (float) Math.random();
-		 ArrayList<Integer> probs = new ArrayList<>();
-		 int sum = 0;
-		
-		for(int i = 0; i < alphabet_counts.size();i++) {
-			sum += alphabet_counts.get(i);
-			probs.add(sum/4);
-			
-		}
 		
 		
 		for(int i=0; i< alphabet.size(); i++) {
-			if(rIndex < probs.get(0)) {
-				newToken = alphabet.get(0);
-			}else if(rIndex < probs.get(1)) {
-				newToken = alphabet.get(1);
-			}else if(rIndex < probs.get(2)) {
-				newToken = alphabet.get(2);
-			}else if(rIndex < probs.get(3)){
-				newToken = alphabet.get(3);
-			}
+			float rIndex = (float) Math.random();
+			float index = alphabet.size() * rIndex;
+			sumProbs.add(index);
 		}
+		
+		for(int i =0; i < sumProbs.size(); i++) {
+			float rIndex = (float) Math.random();
+			//float index = ;//this is where the confusion starts. How do I calculate this index?
+		}
+		
+		
 		
 		return newToken;
 	}
