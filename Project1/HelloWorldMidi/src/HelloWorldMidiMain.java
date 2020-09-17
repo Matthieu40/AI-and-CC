@@ -139,17 +139,33 @@ public class HelloWorldMidiMain extends PApplet {
 			rhythmGenerator.train(midiNotesMary.getRhythmArray());
 			
 			System.out.println("pitches:");
-				pitchGenerator.generate(20);
+			System.out.println(pitchGenerator.generate(20));
 			
 			
 			System.out.println("rhythm:");
-				rhythmGenerator.generate(20);
+			System.out.println(rhythmGenerator.generate(20));
 			
 			
 			
 		}else if (key == '3') {
 			
+			pitchGenerator.train(midiNotesMary.getPitchArray());
+			System.out.println("Pitches:");
+			for(int i = 1; i < 10000; i++) {
+				ArrayList<Integer> newSong = pitchGenerator.generate(20);
+				ProbabilityGenerator<Integer> probDistGen = new ProbabilityGenerator<Integer>();
+				probDistGen .train(newSong);
+			}
+			pitchGenerator.printProbabilityDistribution(midiNotesMary.getPitchArray());
 			
+			rhythmGenerator.train(midiNotesMary.getRhythmArray());
+			System.out.println("Rhythm:");
+			for(int i = 1; i < 10000; i++) {
+				ArrayList<Double> newSong = rhythmGenerator.generate(20);
+				ProbabilityGenerator<Double> probDistGen = new ProbabilityGenerator<Double>();
+				probDistGen.train(newSong);
+			}
+			rhythmGenerator.printProbabilityDistribution(midiNotesMary.getRhythmArray());
 			
 		}
 		

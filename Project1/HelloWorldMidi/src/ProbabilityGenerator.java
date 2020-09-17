@@ -14,8 +14,8 @@ public class ProbabilityGenerator<T> {
 	ArrayList<T> alphabet;	
 	ArrayList<Integer> alphabet_counts;
 	// add probability array and update it in train
-	ArrayList<Float> probs = new ArrayList<>();
-	ArrayList<Float> sumProbs = new ArrayList<>();
+	ArrayList<Float> sumProbs;
+	ArrayList<Float> probs;
 	
 	ProbabilityGenerator(){
 		
@@ -48,6 +48,7 @@ public class ProbabilityGenerator<T> {
 		//find total and calculate new probability array from the alphabet count array0
 		float total = 0;
 		total += newTokens.size();
+		 probs = new ArrayList<>();
 		
 		for(int i = 0;i < alphabet_counts.size();i++) {
 			float prob = alphabet_counts.get(i) / total;
@@ -71,10 +72,10 @@ public class ProbabilityGenerator<T> {
 	T generate() {// switch to how it was done in the lecture
 		//T newToken = null;
 		//do something here (generate 1 token)
-		
+		 sumProbs = new ArrayList<>();
 		sumProbs.add(probs.get(0));
 		
-		for(int i=1; i< probs.size()-2; i++) {
+		for(int i=1; i< probs.size()-1; i++) {
 			sumProbs.add(probs.get(i) + sumProbs.get(i-1));
 		}
 		sumProbs.add((float) 1);
@@ -82,17 +83,14 @@ public class ProbabilityGenerator<T> {
 		boolean found = false;
 		int i = 0;
 		float rIndex = (float) Math.random();
-		while(found = false && i < sumProbs.size()) {
+		while(!found && i < sumProbs.size()) {
 			found = rIndex < sumProbs.get(i);
 			i++;
 		}
 		
-		System.out.println(sumProbs);
+		
 		return alphabet.get(i - 1);
 		
-		
-		
-		//return newToken;
 	}
 	
 	
