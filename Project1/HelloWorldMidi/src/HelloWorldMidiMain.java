@@ -75,7 +75,7 @@ public class HelloWorldMidiMain extends PApplet {
 	}
 
 	public void draw() {
-	   //player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+	   player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		
 		textSize(12);
 		fill(0, 102, 153);
