@@ -39,22 +39,40 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T>{
 		
 		for(int i = 0; i < alphabet.size(); i++ ) {
 			
-			int tokenIndex = alphabet.size();
+			T tokenIndex = alphabet.get(i);
+		
+			if((boolean) (tokenIndex = null)) {
 			transitionTable.add(myRow);
 			
 			for(int x = 0; x < transitionTable.size(); x++) {
 				
 				for(int j = 0; j < transitionTable.get(i).size(); j++) {
 					
-					transitionTable.add(0);
+					myRow.add(0);
 					
 				}
 				
 			}
+			alphabet.add(tokenIndex);
+			}	
 			
+				if(lastIndex > -1) {
+					
+					for (int k =0; k < transitionTable.size(); k++) {
+						lastIndex = myRow.get(k);
+						for (int l=0; l< row.size(); l++) {
+							tokenIndex = (T) myRow.get(l +1);
+						}
+					}
+					
+					
+				}
+			
+				lastIndex = (int) tokenIndex;
+				
 		}
-		
 	}
+	
 	
 	
 	ArrayList<T> generate(int length){

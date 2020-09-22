@@ -75,7 +75,7 @@ public class HelloWorldMidiMain extends PApplet {
 	}
 
 	public void draw() {
-	//***	player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+	   //player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		
 		textSize(12);
 		fill(0, 102, 153);
@@ -115,8 +115,12 @@ public class HelloWorldMidiMain extends PApplet {
 		
 		ProbabilityGenerator<Integer> pitchGenerator= new ProbabilityGenerator<Integer>();
 		ProbabilityGenerator<Double> rhythmGenerator= new ProbabilityGenerator<Double>();
+		MarkovGenerator<Integer> pitchGenerator2= new MarkovGenerator<Integer>();
+		MarkovGenerator<Double> rhythmGenerator2= new MarkovGenerator<Double>();
 		pitchGenerator.train(midiNotesMary.getPitchArray());
 		rhythmGenerator.train(midiNotesMary.getRhythmArray());
+		pitchGenerator2.train(midiNotesMary.getPitchArray());
+		rhythmGenerator2.train(midiNotesMary.getRhythmArray());
 		
 		
 		if (key == ' ') {
@@ -166,6 +170,12 @@ public class HelloWorldMidiMain extends PApplet {
 				probDistGen.train(newSong);
 			}
 			rhythmGenerator.printProbabilityDistribution(midiNotesMary.getRhythmArray());
+			
+		}else if (key == '4') {
+			
+			pitchGenerator2.printProbabilityDistribution(midiNotesMary.getPitchArray());
+			
+			rhythmGenerator2.printProbabilityDistribution(midiNotesMary.getRhythmArray());
 			
 		}
 		
