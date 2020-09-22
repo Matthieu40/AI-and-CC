@@ -80,6 +80,9 @@ public class HelloWorldMidiMain extends PApplet {
 		textSize(12);
 		fill(0, 102, 153);
 		text("Press 1 to start the unit test!", width/10, height/2);
+		text("Press 2 to print probability distribution!", width/10, height/2);
+		text("Press 3 to start unit test 3!", width/10, height/2);
+		text("Press 4 to start the unit test for markov generator!", width/10, height/2);
 	}
 
 	//this finds the absolute path of a file
