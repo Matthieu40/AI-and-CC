@@ -29,6 +29,7 @@ public class HelloWorldMidiMain extends PApplet {
 
 	MelodyPlayer player; //play a midi sequence
 	MidiFileToNotes midiNotes; //read a midi file
+	boolean start = false;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -75,8 +76,10 @@ public class HelloWorldMidiMain extends PApplet {
 	}
 
 	public void draw() {
-	   player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		
+		if (start = true) {
+			 player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+		}
 		textSize(12);
 		fill(0, 102, 153);
 		text("Press 1 to start the unit test!", width/10, height/2);
@@ -180,6 +183,8 @@ public class HelloWorldMidiMain extends PApplet {
 			
 			rhythmGenerator2.printProbabilityDistribution(midiNotesMary.getRhythmArray());
 			
+		}else if (key =='5') {
+			start = true;
 		}
 		
 		

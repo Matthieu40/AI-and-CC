@@ -49,14 +49,18 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 				
 				
 				for (int j = 0; j < transitionTable.size(); j++) {
+					myRow = transitionTable.get(j);
 					myRow.add(0);
 				}
 				alphabet.add(newTokens.get(i));
 			}
 
 			if (lastIndex > -1) {
-
-				transitionTable.get(lastIndex);
+				T w = newTokens.get(i);
+				alphabet.add(w);
+				
+				alphabet_counts.add(0);
+				tokenIndex = alphabet.size()-1;
 			}
 
 			lastIndex = tokenIndex;
