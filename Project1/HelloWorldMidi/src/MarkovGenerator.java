@@ -49,8 +49,8 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 				
 				
 				for (int j = 0; j < transitionTable.size(); j++) {
-					myRow = transitionTable.get(j);
-					myRow.add(0);
+					ArrayList<Integer> myRow2 = transitionTable.get(j);
+					myRow2.add(0);
 				}
 				alphabet.add(newTokens.get(i));
 			}
