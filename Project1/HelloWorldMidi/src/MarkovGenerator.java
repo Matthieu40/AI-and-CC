@@ -75,9 +75,21 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	{
 		//normalize the array and print
 		for(int i = 0; i<transitionTable.size();i ++){
-			
-		System.out.println("Token: " + alphabet.get(i) + " | " + "Probability: " +  probs.get(i)); //change to probability.get i); 
-		
+			ArrayList<Integer> row = transitionTable.get(i);
+			for(int x = 0; x < row.size(); x ++) {
+				//calculation
+				float total = 0;
+				total += newTokens.size();
+				 probs = new ArrayList<>();
+				
+				for(int j = 0;j < row.size();j++) {
+					float prob = row.get(j) / total;
+					probs.add (prob);
+				}
+				//printing loop
+		System.out.println("Token: " + alphabet.get(i) + " | " + "Probability: " +  row.get(x) + " "); //change to probability.get i); 
+			}
+			System.out.println();
 	} 
 		
 	}
@@ -88,7 +100,7 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 		  for(int i = 0; i < alphabet.size(); i ++) {
 			int index = alphabet.indexOf(initToken);
 			 ArrayList<Integer> curRow = transitionTable.get(index);
-			//sumProbs = curRow;
+			//sumProbs = curRow; - line in question
 			initToken = curRow.generate();
 		  }
 		 
