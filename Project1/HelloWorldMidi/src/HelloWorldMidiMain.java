@@ -184,6 +184,18 @@ public class HelloWorldMidiMain extends PApplet {
 			//rhythmGenerator2.printProbabilityDistribution(midiNotesMary.getRhythmArray());
 			
 		}else if (key =='5') {
+			pitchGenerator2.train(midiNotesMary.getPitchArray());
+			rhythmGenerator2.train(midiNotesMary.getRhythmArray());
+			
+			System.out.println("pitches:");
+			System.out.println(pitchGenerator2.generate(20));
+			
+			
+			System.out.println("rhythm:");
+			System.out.println(rhythmGenerator2.generate(20));
+		}else if (key =='6') {
+			start = true;
+		}else if (key =='7') {
 			start = true;
 		}
 		
