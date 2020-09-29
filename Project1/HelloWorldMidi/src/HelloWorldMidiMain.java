@@ -77,13 +77,13 @@ public class HelloWorldMidiMain extends PApplet {
 
 	public void draw() {
 		
-		if (start = true) {
+		if (start) {
 			 player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		}
 		textSize(12);
 		fill(0, 102, 153);
 		text("Press 1 to start the unit test!", width/10, height/2);
-		text("Press 2 to print probability distribution!", width/10, height/2);
+		text("Press 2 to print probability distribution!", width/10, height/2 + 50);
 		text("Press 3 to start unit test 3!", width/10, height/2);
 		text("Press 4 to start the unit test for markov generator!", width/10, height/2);
 	}
@@ -179,9 +179,9 @@ public class HelloWorldMidiMain extends PApplet {
 			
 		}else if (key == '4') {
 			
-			pitchGenerator2.printProbabilityDistribution(midiNotesMary.getPitchArray());
+			//pitchGenerator2.printProbabilityDistribution(midiNotesMary.getPitchArray());
 			
-			rhythmGenerator2.printProbabilityDistribution(midiNotesMary.getRhythmArray());
+			//rhythmGenerator2.printProbabilityDistribution(midiNotesMary.getRhythmArray());
 			
 		}else if (key =='5') {
 			start = true;

@@ -47,6 +47,7 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 					myRow.add(0);
 				}
 				
+				transitionTable.add(myRow);
 				
 				for (int j = 0; j < transitionTable.size(); j++) {
 					ArrayList<Integer> myRow2 = transitionTable.get(j);
@@ -56,22 +57,38 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 			}
 
 			if (lastIndex > -1) {
-				T w = newTokens.get(i);
-				alphabet.add(w);
-				
-				alphabet_counts.add(0);
-				tokenIndex = alphabet.size()-1;
+				ArrayList<Integer> curRow = transitionTable.get(lastIndex);
+				int element = curRow.get(tokenIndex);
+				element ++;
+				curRow.set(tokenIndex, element);
 			}
 
 			lastIndex = tokenIndex;
-
+			
 		}
+		System.out.print(transitionTable);
+		System.out.println("Test");
 	}
-
+	//sum each row then print and divide numbers by the sum of each row - 3 for loops to print - make sure sum is a float value
+	
+	  T generate(T initToken){
+		  //int index;
+		  for(int i = 0; i < alphabet.size(); i ++) {
+			int index = alphabet.indexOf(initToken);
+			 ArrayList<Integer> curRow = transitionTable.get(index);
+			//sumProbs = curRow;
+			 curRow.generate();
+		  }
+		 
+		  	
+		 
+		  return initToken;
+	  }
+	
 	ArrayList<T> generate(int length) {
 		ArrayList<T> newSequence = new ArrayList<T>();
 		/*
-		 * for(int i =o; i< length; i++){ newSequence.add(generate()); }
+		 * for(int i = 0; i< length; i++){ newSequence.add(generate()); }
 		 */
 		return newSequence;
 	}
@@ -79,7 +96,7 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	ArrayList<T> generate(int length, T initToken) {
 		ArrayList<T> newSequence = new ArrayList<T>();
 		/*
-		 * for(int i =o; i< length; i++){ newSequence.add(generate()); }
+		 * for(int i = 0; i< length; i++){ newSequence.add(generate()); }
 		 */
 		return newSequence;
 	}
