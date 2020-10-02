@@ -2,7 +2,8 @@ import java.util.*;
 
 public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	ArrayList<ArrayList<Integer>> transitionTable;
-
+	ProbabilityGenerator<T> probGen = new ProbabilityGenerator<T>();
+	
 	MarkovGenerator() {
 		super();
 		transitionTable = new ArrayList();
@@ -16,9 +17,9 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	}
 
 	void train(ArrayList<T> newTokens) {
-
+		probGen.train(newTokens);
 		// to add a row
-		// 
+		//
 		// myRow.add(8); //any number
 
 		// to get the 0th (i.e., first) ArrayList or row from our ArrayList of
@@ -39,16 +40,16 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 			int tokenIndex = alphabet.indexOf(newTokens.get(i));
 
 			if (tokenIndex == -1) {
-				
+
 				tokenIndex = alphabet.size();
 				ArrayList<Integer> myRow = new ArrayList();
-				
-				for(int x = 0; x < alphabet.size(); x ++) {
+
+				for (int x = 0; x < alphabet.size(); x++) {
 					myRow.add(0);
 				}
-				
+
 				transitionTable.add(myRow);
-				
+
 				for (int j = 0; j < transitionTable.size(); j++) {
 					ArrayList<Integer> myRow2 = transitionTable.get(j);
 					myRow2.add(0);
@@ -59,69 +60,88 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 			if (lastIndex > -1) {
 				ArrayList<Integer> curRow = transitionTable.get(lastIndex);
 				int element = curRow.get(tokenIndex);
-				element ++;
+				element++;
 				curRow.set(tokenIndex, element);
 			}
 
 			lastIndex = tokenIndex;
-			
+
 		}
-		System.out.print(transitionTable);
-		System.out.println("Test");
+		//System.out.print(transitionTable);
+		//System.out.println("Test");
 	}
-	//sum each row then print and divide numbers by the sum of each row - 3 for loops to print - make sure sum is a float value
-	
-	void printProbabilityDistribution(ArrayList<T> newTokens)
-	{
-		//normalize the array and print
-		for(int i = 0; i<transitionTable.size();i ++){
+	// sum each row then print and divide numbers by the sum of each row - 3 for
+	// loops to print - make sure sum is a float value
+
+	void printProbabilityDistribution(ArrayList<T> newTokens) {
+		// normalize the array and print
+		//test print - System.out.print(transitionTable);
+		//Reformat this *************
+		for (int i = 0; i < transitionTable.size(); i++) {
+			
 			ArrayList<Integer> row = transitionTable.get(i);
-			for(int x = 0; x < row.size(); x ++) {
-				//calculation
-				float total = 0;
-				total += newTokens.size();
-				 probs = new ArrayList<>();
-				
-				for(int j = 0;j < row.size();j++) {
-					float prob = row.get(j) / total;
-					probs.add (prob);
+			float sum = arraySum(row);
+				updateProbs(row, sum);
+				// printing loop
+				// is it alphabet or transition table?
+				System.out.print(alphabet.get(i) + " ");
+				for(int x = 0; x < probs.size(); x++) {
+				//System.out.print(alphabet.get(i) + "  " + probs.get(x) + " "); 
+					System.out.print(probs.get(x) + " "); 
 				}
-				//printing loop
-		System.out.println("Token: " + alphabet.get(i) + " | " + "Probability: " +  row.get(x) + " "); //change to probability.get i); 
-			}
 			System.out.println();
-	} 
-		
+		}
+
 	}
 	
-	
-	  T generate(T initToken){
-		  //int index;
-		  for(int i = 0; i < alphabet.size(); i ++) {
-			int index = alphabet.indexOf(initToken);
-			 ArrayList<Integer> curRow = transitionTable.get(index);
-			//sumProbs = curRow; - line in question
-			initToken = curRow.generate();
-		  }
-		 
-		  return initToken;
-	  }
-	  
-	  	
-	
-	ArrayList<T> generate(int length) {
-		ArrayList<T> newSequence = new ArrayList<T>();
+	float arraySum(ArrayList<Integer> row) {
+		float sum = 0;
+		for(int i = 0; i < row.size(); i ++) {
+			sum += row.get(i);
+		}
 		
-		 for(int i = 0; i< length; i++){ newSequence.add(generate()); }
-		 
-		return newSequence;
+		return sum;
+	}
+	
+	void updateProbs(ArrayList<Integer> row, float total) {
+		probs = new ArrayList<Float>();
+		for (int j = 0; j < row.size(); j++) {
+			float prob = row.get(j) / total;
+			probs.add(prob);
+		}
+}
+
+	T generate(T initToken) {
+		// int index;
+		
+			int index = alphabet.indexOf(initToken);
+			ArrayList<Integer> curRow = transitionTable.get(index);
+			// sumProbs = curRow; - line in question
+			//initToken = curRow.generate();
+			total = arraySum(curRow);
+			updateProbs(curRow, total);
+			if(total == 0) {
+				
+				return probGen.generate();
+				
+			}
+			//in train funct probgen.train 
+		return super.generate();
+	}
+
+	ArrayList<T> generate(int length) {
+		return generate(length,probGen.generate());
 	}
 
 	ArrayList<T> generate(int length, T initToken) {
 		ArrayList<T> newSequence = new ArrayList<T>();
-		
-		 for(int i = 0; i< length; i++){ newSequence.add(generate()); }
-		 
+		newSequence.add(initToken);
+		for (int i = 0; i < length; i++) {
+			T nextToken = generate(initToken);
+			newSequence.add(nextToken);
+			initToken = nextToken;
+		}
+
 		return newSequence;
 	}
 

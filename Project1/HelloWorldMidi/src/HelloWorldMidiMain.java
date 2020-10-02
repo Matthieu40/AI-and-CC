@@ -179,9 +179,9 @@ public class HelloWorldMidiMain extends PApplet {
 			
 		}else if (key == '4') {
 			
-			//pitchGenerator2.printProbabilityDistribution(midiNotesMary.getPitchArray());
-			
-			//rhythmGenerator2.printProbabilityDistribution(midiNotesMary.getRhythmArray());
+			pitchGenerator2.printProbabilityDistribution(midiNotesMary.getPitchArray());
+			System.out.println(" ");
+			rhythmGenerator2.printProbabilityDistribution(midiNotesMary.getRhythmArray());
 			
 		}else if (key =='5') {
 			pitchGenerator2.train(midiNotesMary.getPitchArray());
@@ -194,7 +194,23 @@ public class HelloWorldMidiMain extends PApplet {
 			System.out.println("rhythm:");
 			System.out.println(rhythmGenerator2.generate(20));
 		}else if (key =='6') {
-			start = true;
+			System.out.println("Pitches:");
+			for(int i = 1; i < 10000; i++) {
+				ArrayList<Integer> newSong = pitchGenerator2.generate(20);
+				MarkovGenerator<Integer> probDistGen = new MarkovGenerator<Integer>();
+				probDistGen .train(newSong);
+			}
+			pitchGenerator2.printProbabilityDistribution(midiNotesMary.getPitchArray());
+			
+			rhythmGenerator2.train(midiNotesMary.getRhythmArray());
+			System.out.println("Rhythm:");
+			for(int i = 1; i < 10000; i++) {
+				ArrayList<Double> newSong = rhythmGenerator2.generate(20);
+				MarkovGenerator<Double> probDistGen = new MarkovGenerator<Double>();
+				probDistGen.train(newSong);
+			}
+			rhythmGenerator2.printProbabilityDistribution(midiNotesMary.getRhythmArray());
+			
 		}else if (key =='7') {
 			start = true;
 		}

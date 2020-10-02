@@ -16,7 +16,7 @@ public class ProbabilityGenerator<T> {
 	// add probability array and update it in train
 	ArrayList<Float> sumProbs;
 	ArrayList<Float> probs;
-	
+	float total = 0;
 	ProbabilityGenerator(){
 		
 		alphabet = new ArrayList<T>();
@@ -46,7 +46,7 @@ public class ProbabilityGenerator<T> {
 		}
 		
 		//find total and calculate new probability array from the alphabet count array0
-		float total = 0;
+		
 		total += newTokens.size();
 		 probs = new ArrayList<>();
 		
