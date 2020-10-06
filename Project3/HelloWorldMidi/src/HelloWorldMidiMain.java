@@ -125,14 +125,15 @@ public class HelloWorldMidiMain extends PApplet {
 		MarkovGenerator<Integer> pitchGenerator2= new MarkovGenerator<Integer>();
 		MarkovGenerator<Double> rhythmGenerator2= new MarkovGenerator<Double>();
 		
-		MarkovChain<Integer> pitchGenerator3= new MarkovChain<Integer>();
-		MarkovChain<Double> rhythmGenerator3= new MarkovChain<Double>();
+		MarkovChain<Integer> pitchGenerator3= new MarkovChain<Integer>(2);
+		MarkovChain<Double> rhythmGenerator3= new MarkovChain<Double>(2);
 		
 		
 		pitchGenerator.train(midiNotesMary.getPitchArray());
 		rhythmGenerator.train(midiNotesMary.getRhythmArray());
 		pitchGenerator2.train(midiNotesMary.getPitchArray());
 		rhythmGenerator2.train(midiNotesMary.getRhythmArray());
+		//ask if this is called correctly
 		pitchGenerator3.train(midiNotesMary.getPitchArray());
 		rhythmGenerator3.train(midiNotesMary.getRhythmArray());
 		
