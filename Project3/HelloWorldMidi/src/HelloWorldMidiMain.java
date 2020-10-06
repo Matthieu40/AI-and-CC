@@ -121,13 +121,20 @@ public class HelloWorldMidiMain extends PApplet {
 		
 		ProbabilityGenerator<Integer> pitchGenerator= new ProbabilityGenerator<Integer>();
 		ProbabilityGenerator<Double> rhythmGenerator= new ProbabilityGenerator<Double>();
+		
 		MarkovGenerator<Integer> pitchGenerator2= new MarkovGenerator<Integer>();
 		MarkovGenerator<Double> rhythmGenerator2= new MarkovGenerator<Double>();
+		
+		MarkovChain<Integer> pitchGenerator3= new MarkovChain<Integer>();
+		MarkovChain<Double> rhythmGenerator3= new MarkovChain<Double>();
+		
+		
 		pitchGenerator.train(midiNotesMary.getPitchArray());
 		rhythmGenerator.train(midiNotesMary.getRhythmArray());
 		pitchGenerator2.train(midiNotesMary.getPitchArray());
 		rhythmGenerator2.train(midiNotesMary.getRhythmArray());
-		
+		pitchGenerator3.train(midiNotesMary.getPitchArray());
+		rhythmGenerator3.train(midiNotesMary.getRhythmArray());
 		
 		if (key == ' ') {
 			player.reset();
@@ -212,6 +219,11 @@ public class HelloWorldMidiMain extends PApplet {
 			rhythmGenerator2.printProbabilityDistribution(midiNotesMary.getRhythmArray());
 			
 		}else if (key =='7') {
+			pitchGenerator3.printProbabilityDistribution(midiNotesMary.getPitchArray());
+			System.out.println(" ");
+			rhythmGenerator3.printProbabilityDistribution(midiNotesMary.getRhythmArray());
+
+		}else if (key =='8') {
 			start = true;
 		}
 		

@@ -52,5 +52,26 @@ public class MarkovChain<T> extends MarkovGenerator<T>  {
 		
 	}
 	
+	void printProbabilityDistribution(ArrayList<T> newTokens) {
+		// normalize the array and print
+		//test print - System.out.print(transitionTable);
+		//Reformat this *************
+		for (int i = 0; i < transitionTable.size(); i++) {
+			
+			ArrayList<Integer> row = transitionTable.get(i);
+			float sum = arraySum(row);
+				updateProbs(row, sum);
+				// printing loop
+				// is it alphabet or transition table?
+				System.out.print(alphabet.get(i) + " ");
+				for(int x = 0; x < probs.size(); x++) {
+				//System.out.print(alphabet.get(i) + "  " + probs.get(x) + " "); 
+					System.out.print(probs.get(x) + " "); 
+				}
+			System.out.println();
+		}
+
+	}
+	
 	
 }
