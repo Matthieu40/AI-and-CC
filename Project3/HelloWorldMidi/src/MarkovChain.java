@@ -75,13 +75,13 @@ public class MarkovChain<T> extends MarkovGenerator<T>  {
 		//Reformat this *************
 		//print alphabet 
 		for (int i = 0; i < transitionTable.size(); i++) {
-			ArrayList<T> curSequence = new ArrayList<T>(newTokens.subList(i - (orderM - 2), i + 1));//check to see what value would display both numbers
+			//ArrayList<T> curSequence = new ArrayList<T>(newTokens.subList(i - (orderM - 2), i + 1));//check to see what value would display both numbers
 			ArrayList<Integer> row = transitionTable.get(i);
 			float sum = arraySum(row);
 				updateProbs(row, sum);
 				// printing loop
 				// is it alphabet or transition table?
-				System.out.print(curSequence + " ");//current sequences instead of alphabet
+				System.out.print(uniqueAlphabetSequences.get(i) + " ");//current sequences instead of alphabet
 				for(int x = 0; x < probs.size(); x++) {
 				//System.out.print(alphabet.get(i) + "  " + probs.get(x) + " "); 
 					System.out.print(probs.get(x) + " "); 
