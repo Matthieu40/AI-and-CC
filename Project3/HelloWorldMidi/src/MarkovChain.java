@@ -2,6 +2,7 @@ import java.util.*;
 
 public class MarkovChain<T> extends MarkovGenerator<T>  {
 	ArrayList<ArrayList<T>> uniqueAlphabetSequences = new ArrayList<>();
+	//ArrayList<T> curSequence = new ArrayList<T>();
 	int orderM;
 	MarkovChain(int orderM1){
 		super();
@@ -41,9 +42,8 @@ public class MarkovChain<T> extends MarkovGenerator<T>  {
 			 
 			
 			
-			 
-			//find tokenIndex
-			tokenIndex = alphabet.indexOf(alphabet.get(i+1));
+
+			tokenIndex = alphabet.indexOf(newTokens.get(i+1));
 			//System.out.println(tokenIndex);
 			
 			if(tokenIndex == -1) // what should I substitute -1 with?
@@ -56,16 +56,17 @@ public class MarkovChain<T> extends MarkovGenerator<T>  {
 				}
 			}
 			
-//			//update the counts (Step 4)
-//			rowIndex = transitionTable.get(tokenIndex);
-//			int element = rowIndex.get(tokenIndex);
-//			element++;
-//			rowIndex.set(tokenIndex, element);
+			//update the counts (Step 4)
+			ArrayList<Integer> rowIndex2 = new ArrayList();
+			rowIndex2 = transitionTable.get(rowIndex);
+			int element = rowIndex2.get(tokenIndex);
+			element++;
+			rowIndex2.set(tokenIndex, element);
 		}	
-			System.out.println(uniqueAlphabetSequences);
-////			//print transition table
-			System.out.println(transitionTable);
-//			
+			//System.out.println(uniqueAlphabetSequences);
+			//print transition table
+			//System.out.println(transitionTable);
+			
 	}
 	
 	void printProbabilityDistribution(ArrayList<T> newTokens) {
@@ -74,13 +75,13 @@ public class MarkovChain<T> extends MarkovGenerator<T>  {
 		//Reformat this *************
 		//print alphabet 
 		for (int i = 0; i < transitionTable.size(); i++) {
-			
+			ArrayList<T> curSequence = new ArrayList<T>(newTokens.subList(i - (orderM - 2), i + 1));//check to see what value would display both numbers
 			ArrayList<Integer> row = transitionTable.get(i);
 			float sum = arraySum(row);
 				updateProbs(row, sum);
 				// printing loop
 				// is it alphabet or transition table?
-				System.out.print(alphabet.get(i) + " ");//current sequences instead of alphabet
+				System.out.print(curSequence + " ");//current sequences instead of alphabet
 				for(int x = 0; x < probs.size(); x++) {
 				//System.out.print(alphabet.get(i) + "  " + probs.get(x) + " "); 
 					System.out.print(probs.get(x) + " "); 
