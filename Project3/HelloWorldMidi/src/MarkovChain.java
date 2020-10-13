@@ -93,10 +93,10 @@ public class MarkovChain<T> extends MarkovGenerator<T>  {
 	
 	}
 	
-	T generate(ArrayList initSeq) {
+	T generate(ArrayList <T>initSeq) {
 		int curSeqindex = uniqueAlphabetSequences.indexOf(initSeq);
-		if(initSeq == null) {
-			chainGen.generate();
+		if(curSeqindex == -1) {
+			return chainGen.generate(initSeq.get(initSeq.size()-1));//add initseq
 		}else {
 			ArrayList<Integer> row2 = transitionTable.get(curSeqindex);
 			//how to properly generate from row using probability generator
@@ -104,26 +104,27 @@ public class MarkovChain<T> extends MarkovGenerator<T>  {
 			updateProbs(row2, total);
 			if(total == 0) {
 				
-				return probGen.generate();
+				return chainGen.generate();
 				
+			}else {
+				return super.generate();
 			}
 			//probGen.generate(row2);
 		}
 		
-		
-		
-		return super.generate();
 	}
 	
-	ArrayList generate(ArrayList initSeq, int numTokensToGen) {
+	
+	ArrayList generate(ArrayList<T>initSeq, int numTokensToGen) {
 		ArrayList<T> outputMelody = new ArrayList<T>();
 		for(int i = 1; i < numTokensToGen; i++) {
 			
-			generate(initSeq);
+			T newToken = generate(initSeq);
 			//proper way to remove 1st token -ask
 			//ask for clarification for steps 2-5 for this gen function
-			initSeq.set(0,0);
-			
+			initSeq.remove(0);
+			initSeq.add(newToken);
+			outputMelody.add(newToken);
 		}
 		return outputMelody;
 	}
