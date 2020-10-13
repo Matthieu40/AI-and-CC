@@ -2,6 +2,7 @@ import java.util.*;
 
 public class MarkovChain<T> extends MarkovGenerator<T>  {
 	ArrayList<ArrayList<T>> uniqueAlphabetSequences = new ArrayList<>();
+	MarkovChain<T> chainGen= new MarkovChain<T>(1);
 	//ArrayList<T> curSequence = new ArrayList<T>();
 	int orderM;
 	MarkovChain(int orderM1){
@@ -10,6 +11,7 @@ public class MarkovChain<T> extends MarkovGenerator<T>  {
 	}
 	
 	void train(ArrayList<T> newTokens) {
+		chainGen.train(newTokens);
 		
 		int tokenIndex = -1;
 		int rowIndex = -1;
@@ -89,6 +91,41 @@ public class MarkovChain<T> extends MarkovGenerator<T>  {
 			System.out.println();
 		}
 	
+	}
+	
+	T generate(ArrayList initSeq) {
+		int curSeqindex = uniqueAlphabetSequences.indexOf(initSeq);
+		if(initSeq == null) {
+			chainGen.generate();
+		}else {
+			ArrayList<Integer> row2 = transitionTable.get(curSeqindex);
+			//how to properly generate from row using probability generator
+			total = arraySum(row2);
+			updateProbs(row2, total);
+			if(total == 0) {
+				
+				return probGen.generate();
+				
+			}
+			//probGen.generate(row2);
+		}
+		
+		
+		
+		return super.generate();
+	}
+	
+	ArrayList generate(ArrayList initSeq, int numTokensToGen) {
+		ArrayList<T> outputMelody = new ArrayList<T>();
+		for(int i = 1; i < numTokensToGen; i++) {
+			
+			generate(initSeq);
+			//proper way to remove 1st token -ask
+			//ask for clarification for steps 2-5 for this gen function
+			initSeq.set(0,0);
+			
+		}
+		return outputMelody;
 	}
 	
 	
