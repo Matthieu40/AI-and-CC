@@ -225,6 +225,34 @@ public class HelloWorldMidiMain extends PApplet {
 			rhythmGenerator3.printProbabilityDistribution(midiNotesMary.getRhythmArray());
 
 		}else if (key =='8') {
+			pitchGenerator3.train(midiNotesMary.getPitchArray());
+			rhythmGenerator3.train(midiNotesMary.getRhythmArray());
+			
+			System.out.println("pitches:");
+			System.out.println(pitchGenerator3.generate(20));// need help understanding how to call this properly
+			
+			
+			System.out.println("rhythm:");
+			System.out.println(rhythmGenerator3.generate(20));
+			
+		}else if (key =='9') {
+			System.out.println("Pitches:");
+			for(int i = 1; i < 10000; i++) {
+				ArrayList<Integer> newSong = pitchGenerator3.generate(20);
+				MarkovChain<Integer> probDistGen = new MarkovChain<Integer>(i);
+				probDistGen .train(newSong);
+			}
+			pitchGenerator3.printProbabilityDistribution(midiNotesMary.getPitchArray());
+			
+			rhythmGenerator3.train(midiNotesMary.getRhythmArray());
+			System.out.println("Rhythm:");
+			for(int i = 1; i < 10000; i++) {
+				ArrayList<Double> newSong = rhythmGenerator3.generate(20);
+				MarkovChain<Double> probDistGen = new MarkovChain<Double>(i);
+				probDistGen.train(newSong);
+			}
+			rhythmGenerator3.printProbabilityDistribution(midiNotesMary.getRhythmArray());
+		}else if (key =='0') {
 			start = true;
 		}
 		
