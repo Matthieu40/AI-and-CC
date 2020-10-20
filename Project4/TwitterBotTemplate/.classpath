@@ -6,7 +6,6 @@
 	<classpathentry kind="lib" path="gluegen-rt.jar"/>
 	<classpathentry kind="lib" path="jogl-all.jar"/>
 	<classpathentry kind="lib" path="twitter4j-core-4.0.4.jar"/>
-	<classpathentry kind="lib" path="/Users/courtney/Downloads/jaunt1.6.0 (2)/jaunt1.6.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/boyge/Downloads/jaunt1.6.0/jaunt1.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

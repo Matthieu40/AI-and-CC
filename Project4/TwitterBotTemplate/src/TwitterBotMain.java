@@ -1,5 +1,5 @@
-/* Programmer: Courtney Brown
- * Date: Created Fall 2018, Modified 2019, 2020
+/* Programmer: Matthieu Legagneur
+ * Date: Created Fall 2018, Modified 2020
  * This class is a template for creating a twitterbot & also demonstrated web-scraping
  */
 
@@ -20,7 +20,7 @@ import com.jaunt.JauntException;
 public class TwitterBotMain extends PApplet {
 
 	private ArrayList<String> tokens;
-	private static String HEYER_TWITTER_URL = "https://twitter.com/GeorgetteRomanc"; //this is mine, you should use yours
+	private static String HEYER_TWITTER_URL = "https://twitter.com/MatthieuL40"; //this is mine, you should use yours
 	private static int TWITTER_CHAR_LIMIT = 140; //I understand this has changed... but forget limit
 	
 	//useful constant strings -- for instance if you want to make sure your tweet ends on a space or ending punctuation, etc.
@@ -53,34 +53,53 @@ public class TwitterBotMain extends PApplet {
 		
 //NOTE: everything starts uncommented. Comment out the calls that you would like to try and use.
 		
-		loadNovel("data/The Grand Sophy excerpt.txt"); //TODO: must train from another source
-//		println("Token size:"+tokens.size());
-
+		loadNovel("data2/GatsbyExcerpts.txt"); //TODO: must train from another source
+		println("Token size:"+tokens.size());//uncomment later
+		
+//		ArrayList<String> seed = new ArrayList();
+//		seed.add("I");
+//		seed.add("should");
+//		seed.add("in");
+//		seed.add("my");
+//		String start = concatTokens(seed);
+		//**** just use the status and the scraper*******
 		//TODO: train an AI algorithm (eg, Markov Chain) and generate text for markov chain status
+		//declare markov chain
+		MarkovGenerator<String> mc = new MarkovGenerator<String>();
+		mc.train(tokens);//replace with tokens & Mc*****
 		
 		//can train on twitter statuses -- note: in your code I would put this part in a separate function
 		//but anyhow, here is an example of searrching twitter hashtag. You have to pay $$ to the man to get more results. :(
 		//see TwitterInteraction class
-//		ArrayList<String> tweetResults = tweet.searchForTweets("John Cage");
-//		for (int i = 0; i < tweetResults.size(); i++) {
-//				println(tweetResults.get(i)); //just prints out the results for now
-//		}
-		
+		ArrayList<String> tweetResults = tweet.searchForTweets("Jay Gatsby");
+		for (int i = 0; i < tweetResults.size(); i++) {
+				println(tweetResults.get(i)); //just prints out the results for now
+				//TextTokenizer tokenizer1 = new TextTokenizer(tweetResults.get(i));
+				//use in markov gen
+				//mc.train();
+		}
 		//Make sure within Twitter limits (used to be 140 but now is more?)
-		String status = "OMG testing again";
-		tweet.updateTwitter(status);
-				
+		//String status = "Hello World -- I am a twitterbot";
+		//figure out how to set status to tweet data******///
+		//uncomment this after setting the status to the tweet data
+		//tweet.updateTwitter(status);
+		
+		
 		//prints the text content of the sites that come up with the google search of dogs
 //		//you may use this content to train your AI too
+		//If used, this just prints the results and doesn't add them to an array ******
 //		Scraper scraper = new Scraper(); 
 //		ArrayList<String> results;
 //		try {
-//			results = scraper.scrapeGoogleResults("dogs");
+//			results = scraper.scrapeGoogleResults("Jay Gatsby");
 //			
 //			//print your results
 //			System.out.println(results); 
 //			
-////			scraper.scrape("http://google.com",  "dogs"); //see class documentation
+////			scraper.scrape("http://google.com",  "Jay Gatsby"); //see class documentation
+			//Tokenize scrapper data?*****//
+			//train data on markov generator******//
+			// set the data equal to status then update******///
 //
 //		} catch (JauntException e) {
 //			// TODO Auto-generated catch block
@@ -93,7 +112,7 @@ public class TwitterBotMain extends PApplet {
 	//this loads the novel 'The Grand Sophy' given a path p -- but really will load any file.
 	void loadNovel(String p) {
 		String filePath = getPath(p);
-		Path path = Paths.get(filePath);
+		Path path = Paths.get("C:\\Users\\boyge\\OneDrive\\Documents\\school 2020-2021\\eclipse projects\\Working Dir\\Project4\\TwitterBotTemplate\\bin\\data2\\GatsbyExcerpts.txt");
 		tokens = new ArrayList<String>();
 
 		try {
@@ -123,6 +142,8 @@ public class TwitterBotMain extends PApplet {
 		String filePath = "";
 		try {
 			filePath = URLDecoder.decode(getClass().getResource(path).getPath(), "UTF-8");
+			
+			filePath = filePath.substring(1,filePath.length()-1);
 
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
