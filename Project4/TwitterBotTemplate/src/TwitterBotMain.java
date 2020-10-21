@@ -61,12 +61,13 @@ public class TwitterBotMain extends PApplet {
 //		seed.add("should");
 //		seed.add("in");
 //		seed.add("my");
-//		String start = concatTokens(seed);
-		//**** just use the status and the scraper*******
+
+		
 		//TODO: train an AI algorithm (eg, Markov Chain) and generate text for markov chain status
 		//declare markov chain
 		MarkovGenerator<String> mc = new MarkovGenerator<String>();
 		mc.train(tokens);//replace with tokens & Mc*****
+		//since I couldnt read the file, I had trouble figuring out how to turn the file text into tokens
 		
 		//can train on twitter statuses -- note: in your code I would put this part in a separate function
 		//but anyhow, here is an example of searrching twitter hashtag. You have to pay $$ to the man to get more results. :(
@@ -74,15 +75,25 @@ public class TwitterBotMain extends PApplet {
 		ArrayList<String> tweetResults = tweet.searchForTweets("Jay Gatsby");
 		for (int i = 0; i < tweetResults.size(); i++) {
 				println(tweetResults.get(i)); //just prints out the results for now
-				//TextTokenizer tokenizer1 = new TextTokenizer(tweetResults.get(i));
+				TextTokenizer tokenizer1 = new TextTokenizer(tweetResults.get(i));
 				//use in markov gen
-				//mc.train();
 		}
 		//Make sure within Twitter limits (used to be 140 but now is more?)
 		//String status = "Hello World -- I am a twitterbot";
 		//figure out how to set status to tweet data******///
 		//uncomment this after setting the status to the tweet data
-		//tweet.updateTwitter(status);
+		mc.train(tweetResults);
+		//for loop for updating status
+		ArrayList<String> text = mc.generate(42);
+		Iterator<String> itr = text.iterator();
+		String status = null;
+
+		while(itr.hasNext()) {
+		   Object element = itr.next();
+		  status += element + " ";
+		}
+
+		tweet.updateTwitter(status);
 		
 		
 		//prints the text content of the sites that come up with the google search of dogs
