@@ -38,6 +38,9 @@ public class TwitterBotMain extends PApplet {
 	// handles twitter api
 	TwitterInteraction tweet;
 
+	boolean update = false;
+	String status = " ";
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PApplet.main("TwitterBotMain"); // Not really using processing functionality but ya know, you _could_. UI not
@@ -91,14 +94,18 @@ public class TwitterBotMain extends PApplet {
 		// for loop for updating status
 		ArrayList<String> text = mc.generate(42);//why doesn't twitter char work?
 		Iterator<String> itr = text.iterator();
-		String status = null;
+		//String status = " ";
 
 		while (itr.hasNext()) {
 			Object element = itr.next();
 			status += element + " ";
 		}
-
-		tweet.updateTwitter(status);
+		
+//		if(update) {
+//			
+//		tweet.updateTwitter(status);
+//		
+//		}
 
 		// prints the text content of the sites that come up with the google search of
 		// dogs
@@ -171,7 +178,17 @@ public class TwitterBotMain extends PApplet {
 
 	public void draw() {
 		// ellipse(width / 2, height / 2, second(), second());
+		textSize(12);
+		fill(0, 102, 153);
+		text("Press any key to update Twitter status!", width/10, height/2);
 
+	}
+	
+	public void keyPressed() {
+		if (key == ' ') {
+			tweet.updateTwitter(status);
+			
+		}
 	}
 
 }
