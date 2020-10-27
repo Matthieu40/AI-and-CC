@@ -101,11 +101,11 @@ public class TwitterBotMain extends PApplet {
 			status += element + " ";
 		}
 		
-//		if(update) {
-//			
-//		tweet.updateTwitter(status);
-//		
-//		}
+//		int start = status.indexOf("I");
+//		int end = status.lastIndexOf('.');
+//		status = status.substring(start,end);
+
+
 
 		// prints the text content of the sites that come up with the google search of
 		// dogs
