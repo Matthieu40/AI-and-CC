@@ -4,7 +4,7 @@
  */
 import java.io.PrintStream;
 import java.util.*;
-public class Node <Node, T>extends tree{
+public class Node <T>{
 	
 	ArrayList<Node> children = new ArrayList<>();
 	ArrayList<T> tokenSequence = new ArrayList<T>();//check to see if tokensequence is meant to be array list and check for data type
@@ -17,24 +17,27 @@ public class Node <Node, T>extends tree{
 
 	boolean amIASuffix(Node node) {//ask for clarification with this function
 		//do something here:
-		if(node.getTokenSequence().sublist(0,node.getTokenSequence().size()-1).equals(tokenSequence.subList(0, tokenSequence.size()-1))) {
+		if(node.getTokenSequence().subList(node.getTokenSequence().size()-tokenSequence.size(), node.getTokenSequence().size()).equals(tokenSequence.size())) {
 			return true;
 		}else {
 		return false;
 		}
 	}
 	
-	boolean addNode(Node node) {
+	boolean addNode(Node<T> node) {
 		boolean found = false;
-		//node.setTokenSequence(tokenSequence);
-		if(tokenSequence == node) {
+		
+		if(tokenSequence.equals(node.getTokenSequence()) ) {
 			found = true;
 		}else if(amIASuffix(node)||(tokenSequence.size()==0)) {
-			
-			if(found = false && node.getTokenSequence() < tokenSequence.size()) {//is node supposed to be a new obj? why is this wrong?
+			//add while loop and exit when found
+			while(!found) {
+			if(!found && node.getTokenSequence().size() < tokenSequence.size()) {//is node supposed to be a new obj? why is this wrong?
 					children.add(node);
 					found = true;
+					break;
 			}
+		}
 		}
 		
 		return found;
@@ -46,7 +49,7 @@ public class Node <Node, T>extends tree{
 			//figure out how to print each node in children(syntax)
 			//temp
 			for(int i = 0; i< children.size(); i++) {
-				((PrintStream) children.get(i)).print(1);
+				children.get(i).print(1);
 			}
 	}
 	
@@ -56,13 +59,11 @@ public class Node <Node, T>extends tree{
 			System.out.println(tokenSequence.get(i));
 		}
 		for(int j = 0; j < children.size();j++) {
-			((PrintStream) children.get(j)).print(numSpacesBefore+1); // Figure out proper syntax
+			children.get(j).print(numSpacesBefore+1); // Figure out proper syntax
 		}
 	}
 	
-//	void setTokenSequence(ArrayList<T> tokenSequence) {
-//		this.tokenSequence = new ArrayList<T>();
-//	}
+
 	
 	ArrayList<T> getTokenSequence() {
 		return tokenSequence;

@@ -8,10 +8,10 @@ import java.util.*;
 public class tree<T> {
 	int L;
 	Node newNode;
-	Node root;
+	Node root = new Node(new ArrayList<T>());
 	
-	tree(){
-		L = 3;
+	tree(int x){
+		L = x;
 	}
 	
 	
@@ -24,7 +24,7 @@ public class tree<T> {
 			root.addNode(newNode);
 			}
 		}
-		
+	
 	}
 	
 	void print() {
