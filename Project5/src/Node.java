@@ -29,14 +29,16 @@ public class Node <T>{
 		
 		if(tokenSequence.equals(node.getTokenSequence()) ) {
 			found = true;
+			count++;
 		}else if(amIASuffix(node)||(tokenSequence.size()==0)) {
 			//add while loop and exit when found
-			while(!found) {
-			if(!found && node.getTokenSequence().size() < tokenSequence.size()) {//is node supposed to be a new obj? why is this wrong?
-					children.add(node);
-					found = true;
-					count++;
-					break;
+			int index =0;
+			while(!found && index < children.size()) {
+					children.add(node); 
+					index++;
+					found = children.get(index).addNode(node);
+			if(!found && node.getTokenSequence().size()< tokenSequence.size()) {
+				children.add(node);
 			}
 		}
 		}

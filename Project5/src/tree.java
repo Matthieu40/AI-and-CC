@@ -22,8 +22,8 @@ public class tree<T> {
 	void train(ArrayList<T> input) {
 		for(int i = 1; i <= L; i++ ) {
 			for(int j = 0; j <input.size() -(i-1);j++) {
-				ArrayList<T> curSequence = new ArrayList<T>(input.subList(0,i+1));//added 1 to be inclusive
-			//ArrayList<T> curSequence = new ArrayList<T>(newTokens.subList(i - (orderM - 1), i + 1));//reference code from markov chain
+				ArrayList<T> curSequence = new ArrayList<T>(input.subList(0,i+1));//incorrect. Correct this***
+				//ArrayList<T> curSequence = new ArrayList<T>(newTokens.subList(i - (orderM - 1), i + 1));
 			newNode = new Node<T>(curSequence);
 			root.addNode(newNode);
 			}
@@ -31,7 +31,7 @@ public class tree<T> {
 		
 		totalInputTokens += input.size();
 		 
-		//root.pMinElimination(totalInputTokens,pMin);
+		root.pMinElimination(totalInputTokens,pMin);
 	
 	}
 	

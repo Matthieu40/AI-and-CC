@@ -60,6 +60,9 @@ public void keyPressed() {
 	Integer[] myList = {3, 3, 3, 5, 5, 7, 7, 7, 2, 3, 5};
 	ArrayList<Integer> testList = new ArrayList(Arrays.asList(myList));
 	
+	Integer[] myList2 = {2,3,5};
+	ArrayList<Integer> testList2 = new ArrayList(Arrays.asList(myList2));
+	
 	char[] list1 = {'a','b','r','a','c','a','d','a','b','r','a'};
 	ArrayList<String> List1 = new ArrayList(Arrays.asList(list1));
 	
@@ -70,14 +73,18 @@ public void keyPressed() {
 	ArrayList<String> List3 = new ArrayList(Arrays.asList(list3));
 	
 	ArrayList<String> List4 = new ArrayList(Arrays.asList(midiNotesMary.getMelody()));
-	Node node = new Node(testList);
+	
 	//Node node2 = new Node(List2);
 	//Node node3 = new Node(List3);
-	
 	//Declare a tree string - Tree<String> tree = new Tree(L); then tree.train(list) - tree.print()
 	//tree<String> tree = new tree(3);
 	
  if(key == '1') {
+	 //testing amIASuffix
+//	 Node node = new Node(testList);
+//	 Node node2 = new Node(testList2);
+//	 System.out.println(node2.amIASuffix(node));
+	 
 	 tree<String> tree = new tree(3,0);
 	 tree.train(List1);
 	 tree.print();
