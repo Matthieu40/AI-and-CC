@@ -2,11 +2,14 @@
  * c2020-2021 Matthieu Legagneur
  * 10/25/20
  */
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.*;
 import processing.core.*;
 
 public class main extends PApplet {
 
+	MidiFileToNotes midiNotes;
 	
 	public static void main(String[] args) {
 		
@@ -21,6 +24,20 @@ public class main extends PApplet {
 	
 	public void setup() {
 		fill(120, 50, 240);
+		
+	}
+	
+	String getPath(String path) {
+
+		String filePath = "";
+		try {
+			filePath = URLDecoder.decode(getClass().getResource(path).getPath(), "UTF-8");
+
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return filePath;
 	}
 	
 public void draw() {
@@ -35,6 +52,11 @@ public void draw() {
 
 public void keyPressed() {
 
+	MidiFileToNotes midiNotesMary; //Read a midi file
+	String filePath = getPath("mid/MaryHadALittleLamb.mid");
+	midiNotesMary = new MidiFileToNotes(filePath); 
+	midiNotesMary.setWhichLine(0);
+	
 	Integer[] myList = {3, 3, 3, 5, 5, 7, 7, 7, 2, 3, 5};
 	ArrayList<Integer> testList = new ArrayList(Arrays.asList(myList));
 	
@@ -47,6 +69,7 @@ public void keyPressed() {
 	char[] list3 = {'a','b','c','c','c','d','a','a','d','c','d','a','a','b','c','a','d','a','d'};
 	ArrayList<String> List3 = new ArrayList(Arrays.asList(list3));
 	
+	ArrayList<String> List4 = new ArrayList(Arrays.asList(midiNotesMary.getMelody()));
 	Node node = new Node(testList);
 	//Node node2 = new Node(List2);
 	//Node node3 = new Node(List3);
@@ -55,16 +78,22 @@ public void keyPressed() {
 	//tree<String> tree = new tree(3);
 	
  if(key == '1') {
-tree<String> tree = new tree(3);
-tree.train(List1);
-tree.print();
+	 tree<String> tree = new tree(3,0);
+	 tree.train(List1);
+	 tree.print();
 
  }else if (key == '2') {
-	
+	 tree<String> tree2 = new tree(3,0);
+	 tree2.train(List2);
+	 tree2.print();
  }else if (key == '3') {
-	
+	 tree<String> tree3 = new tree(3,0);
+	 tree3.train(List3);
+	 tree3.print();
  }else if (key == '4') {
-	
+	 tree<String> tree4 = new tree(3,0);
+	 tree4.train(List4);
+	 tree4.print();
  }
 	
 	

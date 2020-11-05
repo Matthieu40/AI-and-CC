@@ -8,7 +8,7 @@ public class Node <T>{
 	
 	ArrayList<Node> children = new ArrayList<>();
 	ArrayList<T> tokenSequence = new ArrayList<T>();//check to see if tokensequence is meant to be array list and check for data type
-	
+	int count = 1;
 	//constructor 
 	Node(ArrayList<T> curSequence) {
 		// TODO Auto-generated constructor stub
@@ -17,7 +17,7 @@ public class Node <T>{
 
 	boolean amIASuffix(Node node) {//ask for clarification with this function
 		//do something here:
-		if(node.getTokenSequence().subList(node.getTokenSequence().size()-tokenSequence.size(), node.getTokenSequence().size()).equals(tokenSequence.size())) {
+		if(node.getTokenSequence().subList(node.getTokenSequence().size()-tokenSequence.size(), node.getTokenSequence().size()).equals(tokenSequence)) {
 			return true;
 		}else {
 		return false;
@@ -35,6 +35,7 @@ public class Node <T>{
 			if(!found && node.getTokenSequence().size() < tokenSequence.size()) {//is node supposed to be a new obj? why is this wrong?
 					children.add(node);
 					found = true;
+					count++;
 					break;
 			}
 		}
@@ -63,7 +64,32 @@ public class Node <T>{
 		}
 	}
 	
-
+	boolean pMinElimination(int totalTokens,float pMin) {
+		
+		int prob = 0;
+		
+		for (int x =0; x < tokenSequence.size(); x++) {
+			
+			if(totalTokens == (int)tokenSequence.get(x)) {
+				prob ++;
+			}
+		}
+		
+		boolean shouldRemove = false;
+		if(prob / totalTokens-(tokenSequence.size()) < pMin) {
+			shouldRemove = true;
+		}else {
+			for(int y = 0; y < children.size();y++ ) {
+				children.get(y).pMinElimination(y, pMin);
+				if(shouldRemove == true) {
+					children.remove(children.get(y));
+				}
+			}
+		}
+		
+		return shouldRemove;
+		
+	}
 	
 	ArrayList<T> getTokenSequence() {
 		return tokenSequence;

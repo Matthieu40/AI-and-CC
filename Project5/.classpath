@@ -7,5 +7,7 @@
 	<classpathentry kind="lib" path="C:/Users/boyge/OneDrive/Documents/school 2020-2021/eclipse projects/gluegen-rt-natives-windows-amd64.jar"/>
 	<classpathentry kind="lib" path="C:/Users/boyge/OneDrive/Documents/school 2020-2021/eclipse projects/jogl-all.jar"/>
 	<classpathentry kind="lib" path="C:/Users/boyge/OneDrive/Documents/school 2020-2021/eclipse projects/jogl-all-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Users/boyge/OneDrive/Documents/school 2020-2021/eclipse projects/Extra files/jMusic1.6.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/boyge/OneDrive/Documents/school 2020-2021/eclipse projects/Extra files/themidibus.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
